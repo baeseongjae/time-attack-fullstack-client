@@ -30,8 +30,9 @@ function SignUpPage() {
     if (!isValidEmail) return alert("올바르지 않은 형식의 이메일입니다.");
 
     try {
-      await signUp({ email, password });
+      const accessToken = await signUp({ email, password });
       auth.setIsLoggedIn(true);
+      localStorage.setItem("accessToken", accessToken);
       alert("환영합니다~~! 회원가입에 성공하였습니다.");
     } catch (e) {
       alert("회원가입에 실패하였습니다.");
