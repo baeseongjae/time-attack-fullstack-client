@@ -6,7 +6,9 @@ function HeaderSignWrapper() {
       <Link href="/sign-up" className="px-3 py-2">
         회원가입
       </Link>
-      <button className="px-3 py-2">로그인</button>
+      <Link href="/log-in" className="px-3 py-2">
+        로그인
+      </Link>
     </div>
   );
 }
