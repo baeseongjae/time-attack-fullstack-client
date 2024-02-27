@@ -1,18 +1,28 @@
-"use client";
-
+import api from "@/api/index.api";
+import Heading from "@/components/Heading";
 import Page from "@/components/Page";
+import ProductCardsList from "@/components/ProductCardsList";
 
-function HomePage() {
-  // 헬스체크
-  // const [healthCheck, setHealthCheck] = useState("");
+async function HomePage() {
+  const products = await api.products.getProducts();
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5050/health-check")
-  //     .then((response) => response.text())
-  //     .then((data) => setHealthCheck(data));
-  // });
-
-  return <Page>홈페이지 입니다~~~~ healthCheck는 </Page>;
+  return (
+    <Page>
+      <section>
+        <Heading>전체 판매글</Heading>
+        <ProductCardsList products={products?.posts} />
+      </section>
+    </Page>
+  );
 }
 
 export default HomePage;
+
+// 헬스체크
+// const [healthCheck, setHealthCheck] = useState("");
+
+// useEffect(() => {
+//   fetch("http://localhost:5050/health-check")
+//     .then((response) => response.text())
+//     .then((data) => setHealthCheck(data));
+// });
