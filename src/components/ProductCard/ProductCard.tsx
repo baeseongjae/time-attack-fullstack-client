@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href="/">
+    <Link href={`/${product.id}`}>
       <div>
         <Image src={product.imgsrc} alt={product.title} />
       </div>
