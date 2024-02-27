@@ -1,10 +1,12 @@
 "use client";
 
+import { client } from "@/api/index.api";
 import {
   Dispatch,
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -40,6 +42,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAuthInitialized,
     setIsAuthInitialized,
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setIsLoggedIn(true);
+      client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    }
+    setIsAuthInitialized(true);
+  }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
