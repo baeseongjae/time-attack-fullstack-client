@@ -1,4 +1,5 @@
 import axios from "axios";
+import authAPI from "./auth/auth.api";
 import healthCheck from "./healthCheck.api/healthCheck.api";
 
 export const client = axios.create({
@@ -7,6 +8,7 @@ export const client = axios.create({
 
 const api = {
   healthCheck: healthCheck,
+  auth: authAPI,
 };
 
 export default api;
