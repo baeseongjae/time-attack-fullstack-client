@@ -8,7 +8,7 @@ function HeaderNav() {
           <Link href="/">구입하기</Link>
         </li>
         <li>
-          <Link href="/">문의하기</Link>
+          <Link href="/create-post">판매하기</Link>
         </li>
         <li>
           <Link href="/">내 판매글</Link>
