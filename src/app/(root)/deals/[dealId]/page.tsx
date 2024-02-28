@@ -7,14 +7,18 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
   const productId = Number(props.params.dealId);
   const data = await api.products.getProduct(productId);
   const product = data?.post;
+  console.log(product);
 
   return (
     <Page>
       <section className="max-w-lg mx-auto px-8 py-12 bg-pink-700">
         <div className="">
           <Image
-            src={product.imgsrc}
+            src={`http://localhost:5050${product.imgSrc}`}
             alt={product.title}
+            width={300}
+            height={300}
+            unoptimized
             className="bg-yellow-200 max-w-full h-64"
           />
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import api, { client } from "@/api/index.api";
+import { client } from "@/api/index.api";
 import Heading from "@/components/Heading";
 import Page from "@/components/Page";
 import { useRouter } from "next/navigation";
@@ -34,10 +34,10 @@ function CreatePostPage() {
     formData.append("price", price);
     formData.append("image", image);
 
-    const response = await client.post("/upload", formData);
+    const response = await client.post("/upload/image", formData);
 
     // post api호출.
-    const post = api.products.createPostOfProduct(createProductData);
+    // const post = api.products.createPostOfProduct(createProductData);
     setTitle("");
     setContent("");
     setLocation("");
@@ -79,16 +79,6 @@ function CreatePostPage() {
               />
             </li>
             <li className="flex flex-col">
-              <label htmlFor="image">이미지</label>
-              <input
-                type="file"
-                id="image"
-                onChange={(e) => setImage(e.target.value)}
-                className="border border-slate-300 focus:border-black outline-none transition rounded-md pl-4 py-3"
-              />
-            </li>
-
-            <li className="flex flex-col">
               <label htmlFor="location">직거래 위치</label>
               <input
                 type="text"
@@ -105,6 +95,15 @@ function CreatePostPage() {
                 id="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                className="h-12 border border-slate-300 focus:border-black outline-none transition rounded-md pl-4"
+              />
+            </li>
+            <li className="flex flex-col">
+              <label htmlFor="image">이미지</label>
+              <input
+                type="file"
+                id="image"
+                onChange={(e) => setImage(e.target.files?.[0] || null)}
                 className="h-12 border border-slate-300 focus:border-black outline-none transition rounded-md pl-4"
               />
             </li>
