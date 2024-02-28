@@ -24,9 +24,12 @@ function CreatePostPage() {
     };
     // post api호출.
     const post = api.products.createPostOfProduct(createProductData);
-    console.log(post);
+    setTitle("");
+    setContent("");
+    setLocation("");
+    setPrice("");
     alert("게시글이 성공적으로 등록되었습니다.");
-    router.push("/create-post");
+    router.push("/deals/create");
   };
 
   return (

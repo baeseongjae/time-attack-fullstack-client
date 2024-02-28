@@ -15,7 +15,8 @@ async function signUp(dto: SignUpDto) {
 
 async function logIn(dto: LogInDto) {
   const response = await client.post("/auth/log-in", dto);
-  const accessToken = response.data.accessToken;
+  const data = response.data;
+  const accessToken = data.accessToken;
 
   if (!accessToken) throw new Error("로그인에 실패하였습니다~!");
 
@@ -24,7 +25,7 @@ async function logIn(dto: LogInDto) {
   return accessToken;
 }
 
-// 리프레시 토큰
+// 리프레시 토큰??
 
 const authAPI = {
   signUp,

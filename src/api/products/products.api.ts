@@ -1,5 +1,5 @@
 import { client } from "../index.api";
-import { CreateProductDto } from "./products.dto";
+import { CreateProductDto, UpdateProductDto } from "./products.dto";
 
 async function getProducts() {
   const response = await client.get("/deals");
@@ -22,10 +22,32 @@ async function createPostOfProduct(createProductDto: CreateProductDto) {
   return data;
 }
 
+const getMyPostsOfProduct = async () => {
+  const response = await client.get("/my/deals");
+  const data = response.data;
+
+  return data;
+};
+
+const updateMyPostOfProduct = async (
+  productId: number,
+  updateProductDto: UpdateProductDto
+) => {
+  const response = await client.patch(
+    `/deals/${productId}/edit`,
+    updateProductDto
+  );
+  const data = response.data;
+
+  return data;
+};
+
 const productsAPI = {
   getProducts,
   getProduct,
   createPostOfProduct,
+  getMyPostsOfProduct,
+  updateMyPostOfProduct,
 };
 
 export default productsAPI;

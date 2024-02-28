@@ -2,8 +2,8 @@ import api from "@/api/index.api";
 import Page from "@/components/Page";
 import Image from "next/image";
 
-async function ProductDetailPage(props: { params: { productId: string } }) {
-  const productId = Number(props.params.productId);
+async function ProductDetailPage(props: { params: { dealId: string } }) {
+  const productId = Number(props.params.dealId);
   const data = await api.products.getProduct(productId);
   const product = data?.post;
 

@@ -1,4 +1,3 @@
-import { setAuthInterceptor } from "@/interceptors/authInterceptors";
 import axios from "axios";
 import authAPI from "./auth/auth.api";
 import healthCheck from "./healthCheck.api/healthCheck.api";
@@ -8,7 +7,7 @@ export const client = axios.create({
   baseURL: "http://localhost:5050",
 });
 
-setAuthInterceptor();
+// setAuthInterceptor();
 
 const api = {
   healthCheck: healthCheck,
