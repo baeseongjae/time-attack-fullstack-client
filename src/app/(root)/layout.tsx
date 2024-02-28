@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "./_components/Header";
+import Header from "./_components/Header/Header";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="max-w-screen-lg mx-auto">
+    <div className="">
       <Header />
       {children}
     </div>

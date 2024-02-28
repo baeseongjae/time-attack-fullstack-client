@@ -10,7 +10,7 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
   return (
     <Page>
       <section className="max-w-screen-sm mx-auto px-8 py-12 bg-pink-700">
-        <div className="">
+        <div>
           <Image src={product.imgsrc} alt={product.title} />
         </div>
         <h6>{product.title}</h6>

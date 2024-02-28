@@ -10,9 +10,13 @@ function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/deals/${product.id}`}>
       <div>
-        <Image src={product.imgsrc} alt={product.title} />
+        <Image
+          src=""
+          alt={product.title}
+          className="bg-yellow-200 w-full h-64"
+        />
       </div>
-      <h6>{product.title}</h6>
+      <h6 className="">{product.title}</h6>
       <p>{product.content}</p>
       <p>{product.location}</p>
     </Link>
