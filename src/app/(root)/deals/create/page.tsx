@@ -1,6 +1,6 @@
 "use client";
 
-import api from "@/api/index.api";
+import api, { client } from "@/api/index.api";
 import Heading from "@/components/Heading";
 import Page from "@/components/Page";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,7 @@ function CreatePostPage() {
   const [location, setLocation] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const router = useRouter();
+  const [image, setImage] = useState<File | null>(null);
 
   const handleSubmitWriting: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -22,6 +23,19 @@ function CreatePostPage() {
       location,
       price,
     };
+
+    if (!image) return alert("이미지를 선택해주세요");
+
+    // 폼데이터로 묶어서
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("location", location);
+    formData.append("price", price);
+    formData.append("image", image);
+
+    const response = await client.post("/upload", formData);
+
     // post api호출.
     const post = api.products.createPostOfProduct(createProductData);
     setTitle("");
@@ -64,6 +78,16 @@ function CreatePostPage() {
                 className="border border-slate-300 focus:border-black outline-none transition rounded-md pl-4 py-3"
               />
             </li>
+            <li className="flex flex-col">
+              <label htmlFor="image">이미지</label>
+              <input
+                type="file"
+                id="image"
+                onChange={(e) => setImage(e.target.value)}
+                className="border border-slate-300 focus:border-black outline-none transition rounded-md pl-4 py-3"
+              />
+            </li>
+
             <li className="flex flex-col">
               <label htmlFor="location">직거래 위치</label>
               <input
