@@ -1,5 +1,6 @@
 import api from "@/api/index.api";
 import Page from "@/components/Page";
+import Price from "@/components/Price";
 import Image from "next/image";
 
 async function ProductDetailPage(props: { params: { dealId: string } }) {
@@ -9,12 +10,25 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
 
   return (
     <Page>
-      <section className="max-w-screen-sm mx-auto px-8 py-12 bg-pink-700">
-        <div>
-          <Image src={product.imgsrc} alt={product.title} />
+      <section className="max-w-lg mx-auto px-8 py-12 bg-pink-700">
+        <div className="">
+          <Image
+            src={product.imgsrc}
+            alt={product.title}
+            className="bg-yellow-200 max-w-full h-64"
+          />
+        </div>
+        <div className="flex items-center py-6">
+          <div className="bg-purple-400 rounded-full w-12 h-12"></div>
+          <div className="ml-4">
+            <p>{product.authorId}</p>
+            <p>{product.location}</p>
+          </div>
         </div>
         <h6>{product.title}</h6>
-        <p>{product.price}</p>
+        <p className="text-2xl font-bold">
+          <Price amount={product.price} />
+        </p>
         <p>{product.content}</p>
       </section>
     </Page>

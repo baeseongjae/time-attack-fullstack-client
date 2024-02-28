@@ -1,6 +1,7 @@
 import api from "@/api/index.api";
 import Image from "next/image";
 import Link from "next/link";
+import Price from "../Price";
 
 interface ProductCardProps {
   product: Awaited<ReturnType<typeof api.products.getProducts>>[number];
@@ -17,6 +18,9 @@ function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       <h6 className="">{product.title}</h6>
+      <p>
+        <Price amount={product.price} />
+      </p>
       <p>{product.content}</p>
       <p>{product.location}</p>
     </Link>

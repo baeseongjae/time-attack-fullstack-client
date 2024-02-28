@@ -24,7 +24,6 @@ function CreatePostPage() {
     };
     // post api호출.
     const post = api.products.createPostOfProduct(createProductData);
-
     setTitle("");
     setContent("");
     setLocation("");
