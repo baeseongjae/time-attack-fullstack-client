@@ -17,6 +17,10 @@ type AuthContextValue = {
   setIsAuthInitialized: Dispatch<SetStateAction<boolean>>;
 };
 
+const isAccessTokenStored = !!(typeof window !== "undefined"
+  ? localStorage.getItem("accessToken")
+  : null);
+
 // 초기값
 const initialValue = {
   isLoggedIn: false,
@@ -33,7 +37,7 @@ export const useAuth = () => useContext(AuthContext);
 
 // 3. 범위지정, value 할당
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isAccessTokenStored);
   const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
   const value: AuthContextValue = {
@@ -43,14 +47,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsAuthInitialized,
   };
 
+  // 여기다 리프레시하는 토큰 작성.
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setIsLoggedIn(true);
-      client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    let timerId: number | undefined;
+    if (isLoggedIn) {
+      timerId = window.setInterval(async () => {
+        console.log("안녕");
+        const { data: accessToken } = await client.get<string>(
+          "/auth/refresh-token"
+        );
+        console.log("리프레시한 엑세스토큰은", accessToken);
+
+        client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
+        // 로컬 스토리지도 갱신
+        localStorage.setItem("accessToken", accessToken);
+      }, 1000 * 60 * 4.5);
+
+      return () => {
+        window.clearInterval(timerId);
+      };
+    } else {
+      if (!timerId) return;
+
+      window.clearInterval(timerId);
     }
-    setIsAuthInitialized(true);
   }, []);
+
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("accessToken");
+  //   if (accessToken) {
+  //     setIsLoggedIn(true);
+  //     client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  //   }
+  //   setIsAuthInitialized(true);
+  // }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

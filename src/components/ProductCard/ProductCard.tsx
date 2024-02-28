@@ -12,7 +12,7 @@ function ProductCard({ product }: ProductCardProps) {
     <Link href={`/deals/${product.id}`}>
       <div>
         <Image
-          src={product.imgSrc}
+          src={`http://localhost:5050${product.imgSrc}`}
           width={300}
           height={300}
           alt={product.title}

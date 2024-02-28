@@ -25,7 +25,11 @@ function LogInModal() {
 
     try {
       const accessToken = await logIn({ email, password });
+
+      // 1. 헤더에 엑세스 토큰 삽입 -> 바로 위 logIn 함수에서.
+      // 2. 전역 로그인상태 true로 변경
       auth.setIsLoggedIn(true);
+      // 3. 스토리지에 저장
       localStorage.setItem("accessToken", accessToken);
       router.push("/");
       alert("로그인 성공!");
