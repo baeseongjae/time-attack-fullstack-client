@@ -25,13 +25,18 @@ function HeaderSignWrapper() {
   return (
     <div className="ml-auto flex">
       {auth.isLoggedIn ? (
-        <button onClick={handleClickLogOut}>로그아웃</button>
+        <button onClick={handleClickLogOut} className="hover:text-violet-500">
+          로그아웃
+        </button>
       ) : (
         <>
-          <Link href="/sign-up" className="px-3 py-2">
+          <Link href="/sign-up" className="px-3 py-2 hover:text-violet-500">
             회원가입
           </Link>
-          <button onClick={handleClickLogIn} className="px-3 py-2">
+          <button
+            onClick={handleClickLogIn}
+            className="px-3 py-2 hover:text-violet-500"
+          >
             로그인
           </button>
         </>

@@ -9,7 +9,7 @@ function ProductCardsList({ products }: ProductCardsListProps) {
   return (
     <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-8 gap-y-12">
       {products?.map((product) => (
-        <li key={product.id} className="bg-pink-700">
+        <li key={product.id}>
           <ProductCard product={product} />
         </li>
       ))}

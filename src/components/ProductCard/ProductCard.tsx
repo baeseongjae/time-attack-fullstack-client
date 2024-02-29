@@ -12,19 +12,20 @@ function ProductCard({ product }: ProductCardProps) {
     <Link href={`/deals/${product.id}`}>
       <div>
         <Image
-          src={product.imgSrc}
+          src={`http://localhost:5050${product.imgSrc}`}
           width={300}
           height={300}
           alt={product.title}
           className="bg-yellow-200 w-full h-64"
         />
       </div>
-      <h6 className="">{product.title}</h6>
-      <p>
-        <Price amount={product.price} />
-      </p>
-      <p>{product.content}</p>
-      <p>{product.location}</p>
+      <div className="pl-2">
+        <h6 className="pt-4 text-lg">{product.title}</h6>
+        <p className="text-xl font-bold pb-2">
+          <Price amount={product.price} />
+        </p>
+        <p>{product.location}</p>
+      </div>
     </Link>
   );
 }
