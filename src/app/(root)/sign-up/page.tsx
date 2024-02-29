@@ -21,13 +21,14 @@ function SignUpPage() {
 
   const handleClickSignUp = async () => {
     if (!email) return alert("이메일을 입력해주세요");
-    if (!password) return alert("비밀번호를 입력해주세요");
-    if (!rePassword) return alert("비밀번호 확인을 입력해주세요");
-    if (password !== rePassword)
-      return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-
     const isValidEmail = checkEmail(email);
     if (!isValidEmail) return alert("올바르지 않은 형식의 이메일입니다.");
+    if (!password) return alert("비밀번호를 입력해주세요");
+    if (!rePassword) return alert("비밀번호 확인을 입력해주세요");
+    if (password.length < 8)
+      return alert("비밀번호는 8자리 이상이어야 합니다.");
+    if (password !== rePassword)
+      return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 
     try {
       const accessToken = await signUp({ email, password });

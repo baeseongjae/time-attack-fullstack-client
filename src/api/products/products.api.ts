@@ -22,17 +22,17 @@ async function createPostOfProduct(createProductDto: CreateProductDto) {
   return data;
 }
 
-const getMyPostsOfProduct = async () => {
+async function getMyPostsOfProduct() {
   const response = await client.get("/my/deals");
   const data = response.data;
 
   return data;
-};
+}
 
-const updateMyPostOfProduct = async (
+async function updateMyPostOfProduct(
   productId: number,
   updateProductDto: UpdateProductDto
-) => {
+) {
   const response = await client.patch(
     `/deals/${productId}/edit`,
     updateProductDto
@@ -40,7 +40,14 @@ const updateMyPostOfProduct = async (
   const data = response.data;
 
   return data;
-};
+}
+
+async function deleteMyPostOfProduct(productId: number) {
+  const response = await client.delete(`/deals/${productId}`);
+  const data = response.data;
+
+  return data;
+}
 
 const productsAPI = {
   getProducts,
@@ -48,6 +55,7 @@ const productsAPI = {
   createPostOfProduct,
   getMyPostsOfProduct,
   updateMyPostOfProduct,
+  deleteMyPostOfProduct,
 };
 
 export default productsAPI;

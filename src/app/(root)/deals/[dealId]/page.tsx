@@ -10,10 +10,11 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
   const product = data?.post;
 
   console.log(product);
-  // const auth = useAuth();
-  // const handleClickLike = (e) => {
-  //   likeMovie(movie);
-  // };
+
+  const handleClickDeleteButton = async () => {
+    const deletedPost = await api.products.deleteMyPostOfProduct(productId);
+    console.log(deletedPost);
+  };
 
   return (
     <Page>
@@ -40,12 +41,17 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
           <Price amount={product.price} />
         </p>
         <p>{product.content}</p>
-        <Link
-          href={`./${productId}/edit`}
-          className="bg-violet-600 text-white px-3 py-2 rounded-md hover:bg-violet-400 inline-block ml-auto mt-4"
-        >
-          글 수정하기
-        </Link>
+        <div className="flex justify-end gap-x-8">
+          <Link
+            href={`./${productId}/edit`}
+            className="bg-violet-600 text-white px-3 py-2 rounded-md hover:bg-violet-400 inline-block mt-4"
+          >
+            글 수정하기
+          </Link>
+          <button className="bg-violet-600 text-white px-3 py-2 rounded-md hover:bg-violet-400 inline-block mt-4">
+            글 삭제하기
+          </button>
+        </div>
         {/* {auth.isLoggedIn ? (
           <button className="bg-blue-500 rounded-md hover:bg-blue-300">
             관심 표현하기

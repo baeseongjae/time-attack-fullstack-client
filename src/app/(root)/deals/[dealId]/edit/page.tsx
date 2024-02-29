@@ -4,7 +4,7 @@ import api from "@/api/index.api";
 import Heading from "@/components/Heading";
 import Page from "@/components/Page";
 import { useRouter } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 
 function PostEditPage(props: { params: { dealId: string } }) {
   const [title, setTitle] = useState<string>("");
@@ -13,6 +13,19 @@ function PostEditPage(props: { params: { dealId: string } }) {
   const [price, setPrice] = useState<string>("");
   const router = useRouter();
   const productId = Number(props.params.dealId);
+
+  useEffect(() => {
+    async () => {
+      const data = await api.products.getProduct(productId);
+      const product = data?.post;
+      const { oldTitle, oldContent, oldLocation, oldPrice } = product;
+      console.log(oldTitle);
+      setTitle(oldTitle);
+      setContent(oldContent);
+      setLocation(oldLocation);
+      setPrice(oldPrice);
+    };
+  }, []);
 
   const handleSubmitEditForm: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

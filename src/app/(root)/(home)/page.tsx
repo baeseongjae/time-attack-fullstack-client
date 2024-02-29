@@ -18,7 +18,7 @@ async function HomePage() {
 
 export default HomePage;
 
-// 헬스체크
+/***************** 헬스체크 *********************/
 // const [healthCheck, setHealthCheck] = useState("");
 
 // useEffect(() => {
