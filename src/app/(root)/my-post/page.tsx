@@ -4,15 +4,18 @@ import api from "@/api/index.api";
 import Heading from "@/components/Heading";
 import Page from "@/components/Page";
 import ProductCardsList from "@/components/ProductCardsList";
+import { useEffect, useState } from "react";
 
-async function MyPage() {
-  const myPosts = await api.products.getMyPostsOfProduct();
-  console.log("마이포스트는", myPosts);
+function MyPage() {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    api.products.getMyPostsOfProduct().then((data) => setPosts(data.myPosts));
+  }, []);
   return (
     <Page>
       <section>
         <Heading>내 판매글</Heading>
-        <ProductCardsList products={myPosts?.myPosts} />
+        <ProductCardsList products={posts || []} />
       </section>
     </Page>
   );

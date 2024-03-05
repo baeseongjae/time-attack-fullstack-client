@@ -12,7 +12,7 @@ function ProductCard({ product }: ProductCardProps) {
     <Link href={`/deals/${product.id}`}>
       <div>
         <Image
-          src={`http://localhost:5050${product.imgSrc}`}
+          src={`https://port-0-time-attack-fullstack-server-dc9c2nltdolfnd.sel5.cloudtype.app${product.imgSrc}`}
           width={300}
           height={300}
           alt={product.title}

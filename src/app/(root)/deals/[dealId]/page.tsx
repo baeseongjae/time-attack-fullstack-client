@@ -21,7 +21,7 @@ async function ProductDetailPage(props: { params: { dealId: string } }) {
       <section className="max-w-lg mx-auto px-8 py-12">
         <div className="">
           <Image
-            src={`http://localhost:5050${product.imgSrc}`}
+            src={`https://port-0-time-attack-fullstack-server-dc9c2nltdolfnd.sel5.cloudtype.app${product.imgSrc}`}
             alt={product.title}
             width={650}
             height={650}
